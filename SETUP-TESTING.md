@@ -1,3 +1,7 @@
+## Issue #1 path-only candidate (pending independent Codex)
+
+The new root script copies come from private source `a4715994272297895c13150d29d7dbec59b50e29` (see private Issue #1). `setup-container-labs.sh` targets `~/cis255-containers/` and preserves the accepted container framework and bundle. `setup-vm-labs.sh` targets `~/cis255-native/`, verifies and extracts immutable `m2-native-0.1.1/cis255-native-labs-0.1.1.tar.gz` pinned to public commit `8d015d01a51a4f974eb153efc1df31dc98aede01`, SHA-256 `8e02b4611e77859e5b5f75e8372fe585b14e03f85b51172f78058beab97bfbba`. Earlier setup testing and narrative below refer to the previously accepted old paths and are HISTORICAL; both new scripts still require fresh independent Rocky/HTTPS and preserve-work testing.
+
 # CIS255 root setup scripts — public HTTPS validation
 
 `setup-container-labs.sh` and `setup-vm-labs.sh` in this root folder are public technical-test copies from private source `tsbaron55/linux-course-dev`, under `distribution/`. Compare bytes/hashes to the matching exact private Git blob before runtime tests.

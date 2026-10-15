@@ -7,9 +7,13 @@ set -euo pipefail
 for cmd in curl sha256sum tar gzip podman mktemp df awk; do
   command -v "$cmd" >/dev/null || { echo "Missing required command: $cmd. Contact instructor." >&2; exit 2; }
 done
-root="$HOME/linux-course"
-if [[ -e $root && ! -f $root/.installed-bundle-version ]]; then
+root="$HOME/cis255-containers"
+if [[ -L $root || ( -e $root && ! -f $root/.installed-bundle-version ) ]]; then
   echo "Refusing to overwrite an unexpected or incomplete existing directory: $root" >&2
+  exit 2
+fi
+if [[ ! -e $root && ! -L $root && ( -e "$HOME/linux-course" || -L "$HOME/linux-course" ) ]]; then
+  echo 'An older ~/linux-course installation exists; no automatic migration. Contact instructor.' >&2
   exit 2
 fi
 catalog_url="${LINUX_COURSE_CATALOG_URL:-https://raw.githubusercontent.com/tsbaron55/linux-course-downloads/main/catalog.tsv}"
@@ -58,7 +62,7 @@ ensure_image "ubuntu-24.04-poc02.oci.tar.gz" 35924653 \
   "548ac089f6c8ce5a863c19d6e3f49dbd96f72dc7e8772e049be486cc8218a9a7"
 if [[ -f $root/.installed-bundle-version ]]; then
   echo "Existing lab installation preserved (bundle $(cat "$root/.installed-bundle-version"))."
-  echo 'To retrieve newer lab definitions when offered, run: lab update'
+  echo "To retrieve newer lab definitions when offered, run: $root/lab update"
   exit 0
 fi
 echo 'Downloading current, versioned lab bundle...'
@@ -108,21 +112,25 @@ cp "$tmp/course/FRAMEWORK_VERSION" "$tmp/course/.installed-framework-version"
 [[ ! -e $root ]] || fail 'An installation directory appeared during setup; refusing to overwrite.'
 mv "$tmp/course" "$root" || fail 'Could not install course files.'
 echo "Installed bundle $version with $lab_count activity(ies) in $root"
-if [[ -e "$HOME/.local/bin/lab" ]]; then
+wrapper_created=0
+if [[ -e "$HOME/.local/bin/lab" || -L "$HOME/.local/bin/lab" ]]; then
   echo "An existing ~/.local/bin/lab was left untouched. Use: $root/lab"
 else
   mkdir -p "$HOME/.local/bin"
   cat > "$HOME/.local/bin/lab" <<'WRAPPER'
 #!/usr/bin/env bash
-exec "$HOME/linux-course/lab" "$@"
+exec "$HOME/cis255-containers/lab" "$@"
 WRAPPER
   chmod 755 "$HOME/.local/bin/lab"
   echo 'Created ~/.local/bin/lab command wrapper.'
+  wrapper_created=1
 fi
-if [[ ":$PATH:" == *":$HOME/.local/bin:"* ]]; then
+if [[ $wrapper_created == 1 && ":$PATH:" == *":$HOME/.local/bin:"* ]]; then
   echo 'Next: lab identify YOUR_BLACKBOARD_USERNAME'
 else
   echo "Next: $root/lab identify YOUR_BLACKBOARD_USERNAME"
-  echo 'The ~/.local/bin directory is not currently in PATH; no shell settings were changed.'
+  if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    echo 'The ~/.local/bin directory is not currently in PATH; no shell settings were changed.'
+  fi
 fi
 echo 'Technical pilot only: do not distribute as an approved student release.'

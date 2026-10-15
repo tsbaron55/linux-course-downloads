@@ -1,3 +1,7 @@
+## Issue #1 — new installation-directory candidate (NOT independently tested)
+
+The current root setup scripts are **new candidate bytes** from private source `a4715994272297895c13150d29d7dbec59b50e29`, to use `~/cis255-containers/` and `~/cis255-native/`. The native installer pins a checksummed 0.1.1 combined package at public commit `8d015d01a51a4f974eb153efc1df31dc98aede01`. Both new paths require independent Rocky testing and instructor acceptance. Prior October 15 validation applied to old `~/linux-course/` and `~/cis255/` and must not be claimed for these new scripts. Old GitHub prereleases and versioned 0.1.0 M2 files remain immutable.
+
 # Intro to Linux — temporary download mirror
 
 ## Current setup script test files (October 15, 2026)
