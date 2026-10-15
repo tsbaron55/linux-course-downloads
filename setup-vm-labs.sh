@@ -16,8 +16,8 @@ if [[ -e "$HOME/cis255" || -L "$HOME/cis255" ]]; then
   echo 'An older ~/cis255 installation exists; no automatic migration. Contact instructor.' >&2
   exit 2
 fi
-url='https://raw.githubusercontent.com/tsbaron55/linux-course-downloads/8d015d01a51a4f974eb153efc1df31dc98aede01/m2-native-0.1.1/cis255-native-labs-0.1.1.tar.gz'
-sha256='8e02b4611e77859e5b5f75e8372fe585b14e03f85b51172f78058beab97bfbba'
+url='https://raw.githubusercontent.com/tsbaron55/linux-course-downloads/80837fdb2e9a722ac4e5d996aed2cd491dfda6b7/m2-native-0.1.1-repack1/cis255-native-labs-0.1.1.tar.gz'
+sha256='0931f48cabc4953bfee67defaf91024fee3e02f723f214873473ea3c1d3dfe4c'
 tmp="$(mktemp -d "$HOME/.cis255-setup.XXXXXXXX")"
 trap 'rm -rf -- "$tmp"' EXIT
 curl -fLsS --retry 2 --connect-timeout 15 "$url" -o "$tmp/bundle.tar.gz"

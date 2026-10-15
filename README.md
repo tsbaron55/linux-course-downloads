@@ -1,3 +1,7 @@
+## Issue #1 normalized native combined archive — latest candidate
+
+The current public `setup-vm-labs.sh` is the exact private `distribution/setup-vm-labs.sh` from source `38c87910966b9cd9e902e3a00abf55b4fc9ad544`. It now pins the **corrected 0.1.1 combined archive** under public commit `80837fdb2e9a722ac4e5d996aed2cd491dfda6b7`, directory `m2-native-0.1.1-repack1/`, at **3,914 bytes**, SHA-256 `0931f48cabc4953bfee67defaf91024fee3e02f723f214873473ea3c1d3dfe4c`. Earlier `m2-native-0.1.1/` candidate assets remain unchanged. This new-path package remains **pending independent Rocky acceptance and instructor sign-off**. The container setup script is unchanged by this package correction.
+
 ## Issue #1 — new installation-directory candidate (NOT independently tested)
 
 The current root setup scripts are **new candidate bytes** from private source `a4715994272297895c13150d29d7dbec59b50e29`, to use `~/cis255-containers/` and `~/cis255-native/`. The native installer pins a checksummed 0.1.1 combined package at public commit `8d015d01a51a4f974eb153efc1df31dc98aede01`. Both new paths require independent Rocky testing and instructor acceptance. Prior October 15 validation applied to old `~/linux-course/` and `~/cis255/` and must not be claimed for these new scripts. Old GitHub prereleases and versioned 0.1.0 M2 files remain immutable.
