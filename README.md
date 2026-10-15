@@ -1,5 +1,11 @@
 # Intro to Linux — temporary download mirror
 
+## Current setup script test files (October 15, 2026)
+
+Two one-time **student-style installer candidates** are tracked at the repository root: `setup-container-labs.sh` and `setup-vm-labs.sh`. They are intentionally hosted here only for public HTTPS validation before migration to Schoolcraft's college-managed download site. `setup-container-labs.sh` is the previously tested Linux course Podman **lab environment** installer with only the usage text updated. It requires already configured rootless Podman and uses frozen GitHub pilot OCI images plus the current `labs-0.1.1` catalog. `setup-vm-labs.sh` installs the accepted native M2 Try It and Prove It exercises without sudo/Podman from a pinned, checksummed combined package.
+
+The native installer archive is `m2-native-0.1.0/cis255-native-labs-0.1.0.tar.gz` (3903 bytes, SHA-256 `41bcf115cc455b597cd5afa3004dc132b5e7fcedd3d849460b045db7877dbf6e`). Both M2 activities are instructor-accepted at the *technical* level; this is not entire M2 classroom release approval. Final anonymous Rocky testing of these two new public script endpoints and Schoolcraft distribution is pending. See `SETUP-TESTING.md` for review boundaries.
+
 **Status:** Technical pilot only. **Not a released student assignment or supported classroom installer.**
 
 This public repository will temporarily hold frozen container images for development testing of the college's Intro to Linux course. The instructor's working source and test records are maintained separately in a **private** repository. Public access does **not** imply that these pilot images or procedures are ready for students.
